@@ -16,10 +16,12 @@ public class ThreeSum {
                 if (k != -1) {
                     resultList.add(java.util.Arrays.asList(nums[i], nums[j], nums[k]));
                 }
+                // To avoid duplicate triplet
                 while ((j + 1) < nums.length && nums[j] == nums[j + 1]) {
                     ++j;
                 }
             }
+            // To avoid duplicate triplet
             while ((i + 1) < nums.length && nums[i] == nums[i + 1]) {
                 ++i;
             }
