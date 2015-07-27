@@ -3,10 +3,6 @@ package com.srikar.leetcode;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/**
- * Hello world!
- *
- */
 public class MyStack {
 
     Deque<Integer> deque = new ArrayDeque<Integer>();
