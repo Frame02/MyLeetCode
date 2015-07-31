@@ -17,10 +17,10 @@ package com.srikar.leetcode;
 public class MyQueue {
 
     java.util.Stack<Integer> stack = new java.util.Stack<Integer>();
-    java.util.Stack<Integer> tmpStack = new java.util.Stack<Integer>();
     
     // Push element x to the back of queue
     public void push(int x) {
+        java.util.Stack<Integer> tmpStack = new java.util.Stack<Integer>();
         while (!stack.isEmpty()) {
             tmpStack.push(stack.pop());
         }
