@@ -22,41 +22,44 @@
  */
 package com.srikar.leetcode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class LevelOrderTraversal {
 
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> levelOrderList = new ArrayList<List<Integer>>();
-        List<TreeNode> levelNodeList, nextLevelNodeList = new ArrayList<TreeNode>();
-        List<Integer> nextLevelValList = new ArrayList<Integer>();
+        Queue<TreeNode> queue = new ArrayDeque<TreeNode>();
+
+        TreeNode node;
         if (root != null) {
-            nextLevelNodeList.add(root);
-            nextLevelValList.add(root.val);
-            
-            do {
-                levelNodeList = nextLevelNodeList;
-                levelOrderList.add(nextLevelValList);
-                
-                nextLevelNodeList = new ArrayList<TreeNode>();
-                nextLevelValList = new ArrayList<Integer>();
-                
-                for (TreeNode node : levelNodeList) {
+            queue.add(root);
+            int levelSize = 1, nextLevelSize;
+            List<Integer> levelValList;
+            while (levelSize != 0) {
+                levelValList = new ArrayList<Integer>(levelSize);
+                nextLevelSize = 0;
+                for (int i = 0; i < levelSize; ++i) {
+                    node = queue.remove();
+                    levelValList.add(node.val);
                     if (node.left != null) {
-                        nextLevelNodeList.add(node.left);
-                        nextLevelValList.add(node.left.val);
+                        queue.add(node.left);
+                        ++nextLevelSize;
                     }
                     if (node.right != null) {
-                        nextLevelNodeList.add(node.right);
-                        nextLevelValList.add(node.right.val);
+                        queue.add(node.right);
+                        ++nextLevelSize;
                     }
                 }
-                
-            } while (!nextLevelNodeList.isEmpty());
+                levelOrderList.add(levelValList);
+                levelSize = nextLevelSize;
+            }
         }
         return levelOrderList;
     }
+    
 
     public static void main(String[] args) {
         /*Build binary tree level by level */
@@ -68,9 +71,9 @@ public class LevelOrderTraversal {
         // Level 2
         root.left.left = new TreeNode(15);
         root.right.right = new TreeNode(7);
-        /*// Level 3
-        root.left.left.right = new TreeNode(2);*/
-        
+        // Level 3
+         root.left.left.right = new TreeNode(2);
+
         LevelOrderTraversal lot = new LevelOrderTraversal();
         System.out.println(lot.levelOrder(root));
     }
