@@ -1,16 +1,16 @@
 /*
 
-Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
-For example:
-Given the below binary tree and sum = 22,
+ Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+ For example:
+ Given the below binary tree and sum = 22,
 
-              5
-             / \
-            4   8
-           /   / \
-          11  13  4
-         /  \    / \
-        7    2  5   1
+ 5
+ / \
+ 4   8
+ /   / \
+ 11  13  4
+ /  \    / \
+ 7    2  5   1
 
  */
 package com.srikar.leetcode;
@@ -41,22 +41,24 @@ public class PathSum2 {
     }
 
     private void preorderTraversal(TreeNode root, int pathSum) {
-
+        boolean isLeaf = true;
+        
         pathList.add(root.val);
         pathSum += root.val;
 
-        if (root.left == null && root.right == null) {
+        if (root.left != null) {
+            isLeaf = false;
+            preorderTraversal(root.left, pathSum);
+        }
+        if (root.right != null) {
+            isLeaf = false;
+            preorderTraversal(root.right, pathSum);
+        }
+        if (isLeaf) {
             if (pathSum == sum) {
                 resultList.add(new ArrayList(pathList));
             }
-        } else {
-            if (root.left != null) {
-                preorderTraversal(root.left, pathSum);
-            }
-            if (root.right != null) {
-                preorderTraversal(root.right, pathSum);
-            }
-        }
+        } 
         pathList.remove(pathList.size() - 1);
     }
 
