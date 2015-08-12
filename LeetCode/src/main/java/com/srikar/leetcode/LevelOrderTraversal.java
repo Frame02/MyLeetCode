@@ -22,16 +22,14 @@
  */
 package com.srikar.leetcode;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 public class LevelOrderTraversal {
 
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> levelOrderList = new ArrayList<List<Integer>>();
-        Queue<TreeNode> queue = new ArrayDeque<TreeNode>();
+        List<TreeNode> queue = new ArrayList<TreeNode>();
 
         TreeNode node;
         if (root != null) {
@@ -42,7 +40,7 @@ public class LevelOrderTraversal {
                 levelValList = new ArrayList<Integer>(levelSize);
                 nextLevelSize = 0;
                 for (int i = 0; i < levelSize; ++i) {
-                    node = queue.remove();
+                    node = queue.remove(0);
                     levelValList.add(node.val);
                     if (node.left != null) {
                         queue.add(node.left);
