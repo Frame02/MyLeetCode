@@ -18,7 +18,7 @@ package com.srikar.leetcode;
 public class ReorderList {
 
     public void reorderList(ListNode head) {
-        // Ensure that the list has at least two nodes
+        // Ensure that the list has at least two nodes for reordering
         if (head != null && head.next != null) {
             ListNode node = head, tmp, tail;
             // Traverse to the end of the list and find its size
